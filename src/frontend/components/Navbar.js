@@ -25,7 +25,7 @@ const Navigation = ({ web3Handler, account }) => {
               Home
             </Nav.Link>}
             {IsAdmin && (
-              <Nav.Link as={Link} to="/create" className="navItems">
+              <Nav.Link as={Link} to="/create" onClick={sayHello} className="navItems">
                 Create
               </Nav.Link>
             )}
@@ -40,7 +40,7 @@ const Navigation = ({ web3Handler, account }) => {
               </Nav.Link>
             )}
             <Nav.Link as={Link} to="/my-purchases" className="navItems">
-              {IsAdmin ?"Claimed Warranties":"My Warranties"}
+              {IsAdmin ?"Claimed Warranties":"History"}
             </Nav.Link>
             {!IsAdmin ? (
               <Nav.Link as={Link} to="/login" className="navItems">

@@ -11,32 +11,37 @@ const Home = ({ marketplace, nft,account }) => {
     const itemCount = await marketplace.itemCount()
     // console.log(itemCount);
     let items = []
+    
     for (let i = 1; i <= itemCount; i++) {
+    try{
       const item = await marketplace.items(i)
       console.log("1",item);
       if (!item.sold) {
         // get uri url from nft contract
-        const uri = await nft.tokenURI(item.tokenId)
-        // use uri to fetch the nft metadata stored on ipfs 
-        const response = await fetch(uri)
-        const metadata = await response.json()
-        // get total price of item (item price + fee)
-        const totalPrice = await marketplace.getTotalPrice(item.itemId)
-        // Add item to items array
-        console.log("metadata ",metadata)
-        if(account.toLowerCase()===item.UserAddress.toLowerCase()){
-
-          items.push({
-          totalPrice,
-          itemId: item.itemId,
-          seller: item.seller,
-          buyer: item.UserAddress,
-          name: metadata.name,
-          description: metadata.description,
-          image: metadata.image
-        })
-        }
+        try{
+          const uri = await nft.tokenURI(item.tokenId)
+          // use uri to fetch the nft metadata stored on ipfs 
+          const response = await fetch(uri)
+          const metadata = await response.json()
+          // get total price of item (item price + fee)
+          const totalPrice = await marketplace.getTotalPrice(item.itemId)
+          // Add item to items array
+          console.log("metadata ",metadata)
+          if(account.toLowerCase()===item.UserAddress.toLowerCase()){
+  
+            items.push({
+            totalPrice,
+            itemId: item.itemId,
+            seller: item.seller,
+            buyer: item.UserAddress,
+            name: metadata.name,
+            description: metadata.description,
+            image: metadata.image
+          })
+          }
+        }catch(e){console.log('innerif')}
       }
+    }catch(e){}
     }
     setLoading(false)
     setItems(items)

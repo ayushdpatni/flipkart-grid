@@ -39,8 +39,8 @@ const Create = ({ marketplace, nft }) => {
   const createNFT = async () => {
     if (!image || !UserAddress || !name || !description ) return
     try{
-      const final = serial+' '+name;
-      const new_desc = 'Created on'+' '+dateTime+', '+description+', '+'and is Valid till :'+expDate;
+      var final = serial+' '+name;
+      var new_desc = 'Created on'+' '+dateTime+', '+description+', '+'and is Valid till :'+expDate;
       const result = await client.add(JSON.stringify({image, UserAddress, name:final, description:new_desc}))
       mintThenList(result)
     } catch(error) {

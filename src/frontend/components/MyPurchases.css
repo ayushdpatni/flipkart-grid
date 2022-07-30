@@ -26,3 +26,12 @@
     font-family: 'Raleway', sans-serif;
     padding: 20px;
 }
+
+.holder{
+    width: 40px;
+}
+
+.transferNFTButton{
+    width: 468px;
+    align-self: center;
+}
